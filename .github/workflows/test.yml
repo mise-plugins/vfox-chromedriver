@@ -1,0 +1,27 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install mise
+        uses: jdx/mise-action@v2
+
+      - name: Install chromedriver using vfox plugin from GitHub
+        run: |
+          mise install "vfox:mise-plugins/vfox-chromedriver@131.0.6778.69"
+
+      - name: Test chromedriver
+        run: |
+          mise x "vfox:mise-plugins/vfox-chromedriver@131.0.6778.69" -- chromedriver --version
