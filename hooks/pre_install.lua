@@ -11,9 +11,9 @@ function PLUGIN:PreInstall(ctx)
         error("You must provide a version number, eg: vfox install chromedriver@131.0.6778.0")
     end
 
-    -- Determine platform
-    local osType = ctx.osType
-    local archType = ctx.archType
+    -- Determine platform using RUNTIME global
+    local osType = RUNTIME.osType
+    local archType = RUNTIME.archType
     local platform = ""
 
     if osType == "darwin" then

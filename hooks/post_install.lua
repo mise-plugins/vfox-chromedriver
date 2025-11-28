@@ -10,9 +10,9 @@ function PLUGIN:PostInstall(ctx)
     -- Create bin directory
     cmd.exec("mkdir -p '" .. path .. "/bin'")
 
-    -- Determine platform suffix for the extracted directory
-    local osType = ctx.osType
-    local archType = ctx.archType
+    -- Determine platform suffix for the extracted directory using RUNTIME global
+    local osType = RUNTIME.osType
+    local archType = RUNTIME.archType
     local platform = ""
 
     if osType == "darwin" then
